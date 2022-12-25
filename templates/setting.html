@@ -1,0 +1,180 @@
+{% extends "root.html" %}
+{% block content %}
+<header>
+    <style>
+        body {
+            color: #8e9194;
+            background-color: #f4f6f9;
+        }
+
+        .avatar-xl img {
+            width: 110px;
+        }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        .text-muted {
+            color: #aeb0b4 !important;
+            font-weight: 300;
+        }
+
+        .form-submit-button {
+            background: #016ABC;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+        }
+
+        .form-submit-button:hover {
+            background: #B9DFFF;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+        }
+
+        .form-delete-button {
+            background: #6ab0a2;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+        }
+
+        .form-delete-button:hover {
+            background: #064b2a;
+            color: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+        }
+    </style>
+
+
+</header>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h2 class="h3 mb-4 page-title">Account Settings</h2>
+            <div class="my-4">
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="false">Profile</a>
+                    </li>
+                </ul>
+                <form method = "POST">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:30%">
+                                <div class="row mt-5 align-items-center">
+                                    <div class="col">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-7">
+                                                <h4 class="mb-1"> {{name}} </h4>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-7">
+                                                <p class="text-muted">
+                                                    {{email}}
+                                                </p>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col-md-7">
+                                                    <p class="text-muted">
+                                                        {{bio}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </td>
+                            <td>
+                                </br>
+                                <div class="text-muted">
+                                    <div class="form-group">
+                                        <label for="name">User Name</label>
+                                        <input type="text" id="NewName" name="NewName" class="form-control" placeholder= "{{name}}" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="NewEmail" name = "NewEmail" class="form-control" placeholder= "{{email}}"  />
+                                    </div>
+
+                                    <div class="form-group" class="mb-2">
+                                        <label for="inputAddress5" class="mb-2">Bio</label>
+                                        <input type="bio" id="NewBio" name="NewBio" class="form-control" id="inputAddress5"
+                                            placeholder= "{{bio}}"  />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    </br>
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:10%">
+                                <a href="/delete_account"><input class="form-delete-button" type="button"
+                                        value="Delete Account"></a>
+                            </td>
+                            <td></td>
+                            <td style="width:10%">
+                                    <input class="form-submit-button" type="submit" name="submit-profile"
+                                        value="Update Profile">
+                            </td>
+                        </tr>
+                    </table>
+                        <!-- EDIT USER PROFILE ends here -->
+
+                  <!-- EDIT USER PASSWORD -->
+                  <hr class="my-4" />
+                  <div class="row mb-4">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="inputPassword4">Old Password</label>
+                              <input type="password" class="form-control" name="current_passwd">
+                          </div>
+                          <div class="form-group">
+                              <label for="inputPassword5">New Password</label>
+                              <input type="password" class="form-control" name="new_passwd">
+                          </div>
+                          <div class="form-group">
+                              <label for="inputPassword6">Confirm Password</label>
+                              <input type="password" class="form-control" name="confirm_passwd">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <p class="mb-2">Password requirements</p>
+                          <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
+                          <ul class="small text-muted pl-4 mb-0">
+                              <li>Minimum 4 character</li>
+                              <li>Cannot contain any spaces</li>
+                              <li>Must be different from the current password</li>
+                          </ul>
+                      </div>
+                  </div>
+                  <!-- EDIT USER PASSWORD ends here -->
+
+                  <input class="form-submit-button" type="submit" value="Update Password">
+              </form>
+          </div>
+      </div>
+  </div>
+  
+  </div>
+
+{% endblock %}

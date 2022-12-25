@@ -1,0 +1,78 @@
+{% extends "root.html" %}
+{% block content %}
+
+<script>
+  function unfollow(id) {
+    fetch('/api/followed_accounts/' + id, {
+      method: 'DELETE'
+    }).then(response => window.location.reload(true))
+  }
+  function follow(id) {
+    fetch('/api/followed_accounts/' + id, {
+      method: 'POST'
+    }).then(response => window.location.reload(true))
+  }
+</script>
+
+<div class="container">
+    <h1>Users 👥</h1>
+  <form action="/users">
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" aria-describedby="button-search"
+                 placeholder="Type user name here" value="{{ default_query }}">
+          <input class="btn btn-outline-primary" id="button-search" type="submit" value="Search">
+        </div>
+      </div>
+      <div class="col-2 btn-group" role="group-pagination" aria-label="Pagination">
+        <a class="btn btn-secondary"
+          {% if default_page > 0 %}
+           href="/users?q={{ default_query }}&start={{ default_page - 1 }}"
+          {% endif %}
+           >&laquo;</a>
+        <a class="btn btn-secondary"
+          {% if results|length > 0 %}
+           href="/users?q={{ default_query }}&start={{ default_page + 1 }}"
+          {% endif %}
+           >&raquo;</a>
+      </div>
+    </div>
+  </form>
+
+  {% if results|length == 0 %}
+    (none on this page)
+  {% endif %}
+
+  {% for user in results %}
+  <div class="py-3">
+    <div class="card">
+      <div class="card-body">
+         <div class="row">
+            <div class="col">
+              <h5 class="card-title">
+                <a href="/profile/{{ user['id'] }}" class="stretched-link">{{ user['name'] }}</a>
+                <h6 class="card-subtitle mb-2 text-muted">{{ user['email'] }}</h6>
+                <p class="card-text">{{ user['bio'] }}</p>
+              </h5>
+            </div>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row"style="width:210px">
+      {% if user['follow'] != 'True' %}
+      <div class="col">
+        <a x-data="{follow}" style="background-color:Green;" @click='follow({{ user['id'] }})' class="btn btn-secondary" >Follow</a>
+      </div>
+      {% else %}
+      <div class="col">
+        <a x-data="{unfollow}" style="background-color:Red;" @click='unfollow({{ user['id'] }})' class="btn btn-secondary">Unfollow</a>
+      </div>
+      {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
